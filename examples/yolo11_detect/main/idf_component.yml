@@ -3,6 +3,8 @@ dependencies:
   espressif/coco_detect:
     version: "^0.1.0"
     override_path: "../../../models/coco_detect"
+  espressif/esp-dl:
+    override_path: "../../../esp-dl"
   espressif/esp32_p4_function_ev_board_noglib:
     version: "^4.0.1"
     rules:

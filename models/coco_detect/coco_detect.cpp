@@ -73,6 +73,13 @@ COCODetect::COCODetect(model_type_t model_type)
         ESP_LOGE("coco_detect", "coco_detect_yolo11n_s8_v3 is not selected in menuconfig.");
 #endif
         break;
+    case model_type_t::CUSTOM_YOLO11N:
+#if CONFIG_COCO_DETECT_CUSTOM_YOLO11N || CONFIG_COCO_DETECT_MODEL_IN_SDCARD
+        m_model = new coco_detect::Yolo11n("yolo11n.espdl");
+#else
+        ESP_LOGE("coco_detect", "custom yolo11n is not selected in menuconfig.");
+#endif
+        break;
     case model_type_t::YOLO11N_320_S8_V3:
 #if CONFIG_COCO_DETECT_YOLO11N_320_S8_V3 || CONFIG_COCO_DETECT_MODEL_IN_SDCARD
         m_model = new coco_detect::Yolo11n("coco_detect_yolo11n_320_s8_v3.espdl");

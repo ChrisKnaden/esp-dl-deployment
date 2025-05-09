@@ -10,6 +10,10 @@ menu "models: coco_detect"
     config FLASH_COCO_DETECT_YOLO11N_S8_V3
         bool "flash coco_detect_yolo11n_s8_v3"
         depends on !COCO_DETECT_MODEL_IN_SDCARD
+        default n
+    config FLASH_COCO_DETECT_CUSTOM_YOLO11N
+        bool "flash custom yolo11n"
+        depends on !COCO_DETECT_MODEL_IN_SDCARD
         default y
     config FLASH_COCO_DETECT_YOLO11N_320_S8_V3
         bool "flash coco_detect_yolo11n_320_s8_v3"
