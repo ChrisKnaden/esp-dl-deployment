@@ -2,8 +2,8 @@
 #include "esp_log.h"
 #include "bsp/esp-bsp.h"
 
-extern const uint8_t bus_jpg_start[] asm("_binary_bus_jpg_start");
-extern const uint8_t bus_jpg_end[] asm("_binary_bus_jpg_end");
+extern const uint8_t bikes_jpg_start[] asm("_binary_bikes_jpg_start");
+extern const uint8_t bikes_jpg_end[] asm("_binary_bikes_jpg_end");
 const char *TAG = "yolo11n";
 
 extern "C" void app_main(void)
@@ -12,11 +12,13 @@ extern "C" void app_main(void)
     ESP_ERROR_CHECK(bsp_sdcard_mount());
 #endif
 
-    dl::image::jpeg_img_t jpeg_img = {.data = (void *)bus_jpg_start, .data_len = (size_t)(bus_jpg_end - bus_jpg_start)};
+    dl::image::jpeg_img_t jpeg_img = {.data = (void *)bikes_jpg_start, .data_len = (size_t)(bikes_jpg_end - bikes_jpg_start)};
     auto img = sw_decode_jpeg(jpeg_img, dl::image::DL_IMAGE_PIX_TYPE_RGB888);
 
     COCODetect *detect = new COCODetect();
+    ESP_LOGI(TAG, "Decoded image dimensions: %dx%d", img.width, img.height);
     auto &detect_results = detect->run(img);
+    ESP_LOGI(TAG, "Number of detected objects: %d", detect_results.size());
     for (const auto &res : detect_results) {
         ESP_LOGI(TAG,
                  "[category: %d, score: %f, x1: %d, y1: %d, x2: %d, y2: %d]",
