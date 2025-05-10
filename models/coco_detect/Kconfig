@@ -34,6 +34,9 @@ menu "models: coco_detect"
         config COCO_DETECT_YOLO11N_S8_V3
             bool "coco_detect_yolo11n_s8_v3"
             depends on COCO_DETECT_MODEL_IN_SDCARD || FLASH_COCO_DETECT_YOLO11N_S8_V3
+        config COCO_DETECT_CUSTOM_YOLO11N
+            bool "custom yolo11n"
+            depends on COCO_DETECT_MODEL_IN_SDCARD || FLASH_COCO_DETECT_CUSTOM_YOLO11N
         config COCO_DETECT_YOLO11N_320_S8_V3
             bool "coco_detect_yolo11n_320_s8_v3"
             depends on COCO_DETECT_MODEL_IN_SDCARD || FLASH_COCO_DETECT_YOLO11N_320_S8_V3
@@ -45,6 +48,7 @@ menu "models: coco_detect"
         default 1 if COCO_DETECT_YOLO11N_S8_V2
         default 2 if COCO_DETECT_YOLO11N_S8_V3
         default 3 if COCO_DETECT_YOLO11N_320_S8_V3
+        default 4 if COCO_DETECT_CUSTOM_YOLO11N
 
     choice
         prompt "model location"
